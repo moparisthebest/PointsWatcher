@@ -1,0 +1,11 @@
+# editor backup files
+*~
+
+android/bin
+blackberry/build
+images/markets
+
+# idea project files
+.idea/
+
+

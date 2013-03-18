@@ -1,0 +1,21 @@
+
+<div id="searchView" >
+    
+    <div class="paragraph">
+        <strong>Protein:</strong><br/>
+        <input type="number" step="1" id="calcProtein" prompt="Protein" value="{{protein}}" /><br/>
+        <strong>Carbs:</strong><br/>
+        <input type="number" step="1" id="calcCarbs" prompt="Carbs" value="{{carbs}}" /><br/>
+        <strong>Fat:</strong><br/>
+        <input type="number" step="1" id="calcFat" prompt="Fat" value="{{fat}}" /><br/>
+        <strong>Fiber:</strong><br/>
+        <input type="number" step="1" id="calcFiber" prompt="Fiber" value="{{fiber}}" /><br/>
+        
+        <div class="paragraph_noborder"><a class="button" id="calcButton" href="#">Calculate</a></div>
+        {{#amount}}
+        <strong>Amount: </strong><br/>
+        {{amount}}<br/>
+        <div class="paragraph_noborder"><a class="button" id="calcSubtractButton" href="#">Subtract</a></div>
+        {{/amount}}
+    </div>
+</div>

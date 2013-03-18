@@ -1,0 +1,18 @@
+<div id="searchResultsView" class="data-list" >
+    <div class="padded heading">
+        <strong>Daily Points: {{dailyPoints}}</strong>
+        <div class="subtext">{{dailyUsed}} of {{allowance}} used</div><br/>
+        <strong>Weekly Points: {{weeklyPoints}}</strong>
+        <div class="subtext">{{weeklyUsed}} of {{weeklyPointsAllowed}} used</div>
+    </div>
+
+    Subtract
+    <input type="number" step="1" id="pointSubtract" prompt="Subtract" value="{{amount}}" />
+    from
+    <select id="pointType"><option>daily</option><option>weekly</option></select><br/>
+    <br/>
+
+    <div class="paragraph_noborder"><a class="button" id="subtractButton" href="#">Subtract</a></div>
+    <div class="paragraph_noborder"><a class="button" id="resetDayButton" href="#">Reset Day</a></div>
+    <div class="paragraph_noborder"><a class="button" id="resetWeekButton" href="#">Reset Week</a></div>
+</div>

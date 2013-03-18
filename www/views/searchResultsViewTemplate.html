@@ -1,0 +1,21 @@
+<div id="searchResultsView" class="data-list" >
+    <div class="padded heading">
+        Results for search phrase: <br/>{{criteria}}
+    </div>
+    
+    {{#maxSearchLength}}
+    <div class="padded warning">Please refine your search results, only the first {{maxSearchLength}} results are displayed.</div>
+    {{/maxSearchLength}}
+    
+    <ul>
+        {{#values}}
+        <li index="{{index}}">
+            <strong>{{name}}</strong><br/>
+            {{amount}}<br/>
+            {{points}}
+        </li>
+        {{/values}}
+    </ul>
+    
+    
+</div>

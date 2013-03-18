@@ -1,0 +1,22 @@
+
+<div id="searchView" >
+    
+    <div class="paragraph">
+        <strong>Gender:</strong><br/>
+        <select id="calcGender" prompt="Gender"><option>{{gender}}</option><option>{{otherGender}}</option></select><br/>
+        <strong>Age:</strong><br/>
+        <input type="number" step="1" id="calcAge" prompt="Age" value="{{age}}" /> (in years)<br/>
+        <strong>Weight:</strong><br/>
+        <input type="number" step="1" id="calcWeight" prompt="Weight" value="{{weight}}" />
+        <select id="calcWeightType"><option>pounds</option><option>inches</option></select><br/>
+        <strong>Height:</strong><br/>
+        <input type="number" step="1" id="calcHeight" prompt="Height" value="{{height}}" />
+        <select id="calcHeightType"><option>inches</option><option>meters</option></select><br/>
+
+        <div class="paragraph_noborder"><a class="button" id="calcButton" href="#">Calculate</a></div>
+        {{#allowance}}
+        <strong>Allowance: </strong><br/>
+        {{allowance}}<br/>
+        {{/allowance}}
+    </div>
+</div>
