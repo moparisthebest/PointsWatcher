@@ -7,9 +7,4 @@
 /home/mopar/devel/priv/pointsplus/PointsWatcher/android/res/xml/config.xml \
 /home/mopar/devel/priv/pointsplus/PointsWatcher/android/res/values/strings.xml \
 /home/mopar/devel/priv/pointsplus/PointsWatcher/android/res/drawable-ldpi/icon.png \
-/home/mopar/devel/priv/pointsplus/PointsWatcher/android/bin/res/drawable-mdpi/icon.png \
-/home/mopar/devel/priv/pointsplus/PointsWatcher/android/bin/res/drawable-xhdpi/icon.png \
-/home/mopar/devel/priv/pointsplus/PointsWatcher/android/bin/res/drawable-hdpi/icon.png \
-/home/mopar/devel/priv/pointsplus/PointsWatcher/android/bin/res/drawable/icon.png \
-/home/mopar/devel/priv/pointsplus/PointsWatcher/android/bin/res/drawable-ldpi/icon.png \
 /home/mopar/devel/priv/pointsplus/PointsWatcher/android/bin/AndroidManifest.xml \

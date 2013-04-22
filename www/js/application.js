@@ -12,6 +12,7 @@ var maxSearchLength = 50;
 
 var weeklyPointsAllowed = 49;
 
+var valuesLoaded = false;
 var values = [];
 var database;
 var viewAssembler = new ViewAssembler();
@@ -39,8 +40,6 @@ function setupDefaultView() {
     $.ajaxSetup({
         cache: true
     });
-
-    $.getScript("values.js", scriptSuccess);
 }
 
 function onNearbyListItemClick(event) {
@@ -291,6 +290,7 @@ function onBackKey(event) {
         return false;
     }
     navigator.app.exitApp();
+    return true;
 }
 
 document.addEventListener('touchmove', function (e) {

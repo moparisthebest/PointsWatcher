@@ -239,53 +239,37 @@ body {
 }
 
 #defaultView a:active {
-    background-color:#D9D900;
+    background-color: #D9D900;
+}
+
+#defaultView .defaultButton {
+    padding-left:75px;
+    background-position: 5px center;
+    background-repeat:no-repeat;
 }
 
 #defaultView #points {
-    padding-left:75px;
-    background-image:url('graphics/notebook.svg');
-    background-size:45px 45px;
-    background-position: 15px center;
-    background-repeat:no-repeat;
+    background-image:url('graphics/notebook.png');
 }
 
 #defaultView #search {
-    padding-left:75px;
     background-image:url('graphics/search.png');
-    background-position: 5px center;
-    background-repeat:no-repeat;
 }
 
 #defaultView #calculate {
-    padding-left:75px;
     background-image:url('graphics/bread.png');
-    background-size:45px 45px;
-    background-position: 5px center;
-    background-repeat:no-repeat;
 }
 
 #defaultView #calculateAllowance {
-    padding-left:75px;
-    background-image:url('graphics/calculator.svg');
-    background-size:45px 45px;
-    background-position: 5px center;
-    background-repeat:no-repeat;
+    background-image:url('graphics/calculator.png');
 }
 
 #defaultView #settings {
-    padding-left:75px;
-    background-image:url('graphics/settings.svg');
-    background-size:45px 45px;
-    background-position: 5px center;
-    background-repeat:no-repeat;
+    background-image:url('graphics/settings.png');
 }
 
 #defaultView #about {
-    padding-left:75px;
     background-image:url('graphics/info.png');
-    background-position: 10px center;
-    background-repeat:no-repeat;
 }
 
 #aboutView {

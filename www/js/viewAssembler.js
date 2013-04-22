@@ -56,15 +56,16 @@ function isTablet() {
 function onViewClick(event, title, viewTxt) {
     var view = { title: title,
         backLabel: backButtonLabel,
-        view: viewTxt
+        view: viewAssembler[viewTxt.toString()]()
     };
     window.viewNavigator.pushView(view);
     event.stopPropagation();
     return false;
 }
 
-function registerClick(el, id, title, view){
-    el.find(id).on( this.CLICK_EVENT, function(evt){onViewClick(evt, title, view);});
+function registerViewClick(that, el, id, title, func){
+    //alert(el.find(id).toString());
+    el.find(id).on( that.CLICK_EVENT, function(evt){onViewClick(evt, title, func);} );
 }
 
 function ViewAssembler() {
@@ -76,12 +77,11 @@ function ViewAssembler() {
 
 ViewAssembler.prototype.defaultView = function() {
     var el = $( templates.defaultViewTemplate );
-    el.find("#points").on( this.CLICK_EVENT, function(evt){onViewClick(evt, "My Points", viewAssembler.pointsView());} );
-    el.find("#search").on( this.CLICK_EVENT, function(evt){onViewClick(evt, "Food Search", viewAssembler.searchView());} );
-    el.find("#calculate").on( this.CLICK_EVENT, function(evt){onViewClick(evt, "Calculate Points", viewAssembler.calcPointsView());});
-    el.find("#calculateAllowance").on( this.CLICK_EVENT, function(evt){onViewClick(evt, "Calculate Allowance", viewAssembler.calcAllowanceView());});
-    el.find("#about").on( this.CLICK_EVENT, function(evt){onViewClick(evt, "About", viewAssembler.aboutView());} );
-    //registerClick(el, "#about", "About", viewAssembler.aboutView());
+    registerViewClick(this, el, "#points", "My Points", "pointsView");
+    registerViewClick(this, el, "#search", "Food Search", "searchView");
+    registerViewClick(this, el, "#calculate", "Calculate Points", "calcPointsView");
+    registerViewClick(this, el, "#calculateAllowance", "Calculate Allowance", "calcAllowanceView");
+    registerViewClick(this, el, "#about", "About", "aboutView");
     return el;
 }
 
@@ -108,12 +108,13 @@ ViewAssembler.prototype.aboutView = function() {
     return el;
 }
 
-ViewAssembler.prototype.foodDetailsView = function( food ) {
-    var template = templates.foodDetailsViewTemplate;
-    return $( Mustache.to_html(template, food) );
-}
-
 ViewAssembler.prototype.searchView = function () {
+
+    if(!valuesLoaded){
+        valuesLoaded = true;
+        $.getScript("values.js", scriptSuccess);
+    }
+
     var el = $( templates.searchViewTemplate );
     
     el.find( "#searchButton" ).on( this.CLICK_EVENT, onSearchButtonClick );
