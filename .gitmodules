@@ -1,0 +1,3 @@
+[submodule "android/SQLitePlugin"]
+	path = android/SQLitePlugin
+	url = https://github.com/moparisthebest/PhoneGap-SQLitePlugin-Android.git
