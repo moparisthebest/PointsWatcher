@@ -1,0 +1,1 @@
+../android/SQLitePlugin/Android/assets/www/SQLitePlugin.js
