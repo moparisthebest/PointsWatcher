@@ -12,8 +12,10 @@ var maxSearchLength = 50;
 
 var weeklyPointsAllowed = 49;
 
-var valuesLoaded = false;
-var values = [];
+var foodSearchResults = undefined;
+
+var runningCordova = false;
+var foodDb = undefined;
 var database;
 var viewAssembler = new ViewAssembler();
 var backButtonLabel = " ";
@@ -43,7 +45,6 @@ function setupDefaultView() {
 }
 
 function onNearbyListItemClick(event) {
-
     $("li").removeClass("listSelected");
     var target = $(event.target)
     if (target.get(0).nodeName.toUpperCase() != "LI") {
@@ -54,17 +55,9 @@ function onNearbyListItemClick(event) {
     var index = target.attr("index");
     index = parseInt(index);
 
-    database.setItem("amount", values[index][3]);
+    database.setItem("amount", foodSearchResults[index].points);
 
     showPointsPage(true);
-}
-
-function scriptSuccess(data, textStatus, jqXHR) {
-
-    //for (var i = 0; i < values.length; i++) {
-    //    values[i].push(i.toString());
-    //}
-    //console.log( "scriptSuccess: " + values.length );
 }
 
 function pushPointsPage() {
@@ -82,44 +75,28 @@ function showPointsPage(push) {
         window.viewNavigator.pushView(view);
 }
 
+function prepareSearch() {
+    if(foodDb == undefined){
+        //if(window.sqlitePlugin == undefined)
+        //if(!runningCordova)
+            foodDb = new ArrayDatabase();
+        //else
+        //    foodDb = new SQLDatabase();
+    }
+}
+
 function onSearchButtonClick(event) {
     var $input = $("#search_searchPhrase");
     var searchPhrase = $input.val();
 
     if (searchPhrase != undefined && searchPhrase.length > 0) {
-        var values = filterValuesBySearchCriteria(searchPhrase);
+        foodSearchResults = foodDb.searchFood(searchPhrase);
         var view = { title: "Search Results",
             backLabel: backButtonLabel,
-            view: viewAssembler.searchResultsView(values, searchPhrase)
+            view: viewAssembler.searchResultsView(foodSearchResults, searchPhrase)
         };
         window.viewNavigator.pushView(view);
     }
-}
-
-function filterValuesBySearchCriteria(searchPhrase) {
-    var result = [];
-    //var startTime = new Date().getTime();
-    var tokens = searchPhrase.toLowerCase().split(" ");
-    var regexps = new Array(tokens.length);
-    for (var x = 0; x < regexps.length; ++x)
-        regexps[x] = new RegExp(tokens[x]);
-    var numFound = 0;
-    for (var y = 0; y < values.length; ++y) {
-        var found = true;
-        for (var z = 0; z < regexps.length; ++z) {
-            if (!regexps[z].test(values[y][0])) {
-                found = false;
-                break;
-            }
-        }
-        if (found) {
-            result.push(y);
-            if (++numFound == maxSearchLength)
-                break;
-        }
-    }
-    //console.log( new Date().getTime() - startTime );
-    return result;
 }
 
 function isNumber(n) {
@@ -127,7 +104,7 @@ function isNumber(n) {
 }
 
 function isPositiveNumber(n) {
-    return isNumber(n) && n > 0;
+    return isNumber(n) && n >= 0;
 }
 
 function roundPoints(points){
@@ -241,20 +218,6 @@ function onResetPointsButtonClick(dailyNotWeekly) {
     showPointsPage();
 }
 
-function arrayToFoodObject(index) {
-    var result = {};
-
-    var row = values[index];
-
-    result.name = row[1];
-    result.amount = row[2];
-    result.points = row[3];
-
-    result.index = index;
-
-    return result;
-}
-
 function openExternalURL(url) {
     var result = confirm("You will leave the Points Watcher App.  Continue?");
     if (result == true) {
@@ -262,10 +225,9 @@ function openExternalURL(url) {
     }
 }
 
-
 function dbGetNum(key) {
-    var ret = dbGet(key, 0);
-    return ret < 1 ? undefined : ret;
+    var ret = dbGet(key, -1);
+    return ret < 0 ? undefined : ret;
 }
 
 function dbGet(key, defaultVal) {
@@ -280,6 +242,7 @@ function dbGet(key, defaultVal) {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
+    runningCordova = true;
     document.addEventListener("backbutton", onBackKey, false);
 }
 

@@ -108,19 +108,6 @@ ViewAssembler.prototype.aboutView = function() {
     return el;
 }
 
-ViewAssembler.prototype.searchView = function () {
-
-    if(!valuesLoaded){
-        valuesLoaded = true;
-        $.getScript("values.js", scriptSuccess);
-    }
-
-    var el = $( templates.searchViewTemplate );
-    
-    el.find( "#searchButton" ).on( this.CLICK_EVENT, onSearchButtonClick );
-    return el;
-}
-
 ViewAssembler.prototype.calcPointsView = function () {
     var viewModel = {};
     viewModel.amount = dbGetNum("calcPointsAmount");
@@ -155,12 +142,19 @@ ViewAssembler.prototype.calcAllowanceView = function () {
     return el;
 }
 
-ViewAssembler.prototype.searchResultsView = function( indices, searchPhrase ) {
-    var viewModel = {values:[]};
-    for (var i=0; i< indices.length; ++i) {
-        var food = arrayToFoodObject( indices[i] );
-        viewModel.values.push( food );
-    }
+ViewAssembler.prototype.searchView = function () {
+
+    prepareSearch();
+
+    var el = $( templates.searchViewTemplate );
+
+    el.find( "#searchButton" ).on( this.CLICK_EVENT, onSearchButtonClick );
+    return el;
+}
+
+ViewAssembler.prototype.searchResultsView = function( foodSearchResults, searchPhrase ) {
+    var viewModel = {};
+    viewModel.values = foodSearchResults;
     /*
     viewModel.values.sort( function(a, b){
         if ( a.foodName < b.foodName ) { return -1; }
